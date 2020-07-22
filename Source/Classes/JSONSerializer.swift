@@ -157,11 +157,20 @@ internal class JSONSerializer {
                   messageError = error
                 }
                 
-                return Message(channelName: channelName!,
-                               actionName: messageActionName,
-                               messageType: MessageType.message,
-                               data: messageValue,
-                               error: messageError)
+                if let channelName = channelName {
+                    return Message(channelName: channelName,
+                                   actionName: messageActionName,
+                                   messageType: MessageType.message,
+                                   data: messageValue,
+                                   error: messageError)
+                } else {
+                    print("JSON Data: \(JSONObj)")
+                    return Message(channelName: nil,
+                    actionName: nil,
+                    messageType: MessageType.ping,
+                    data: nil,
+                    error: nil)
+                }
             
           }
         } catch {
